@@ -7,6 +7,9 @@ var keyDown = false;
 var keyLeft = false;
 var keyRight = false;
 
+var joyLeft = false;
+var joyRight = false;
+
 var ships = [];
 
 var speed = 5;
@@ -77,9 +80,24 @@ function keyUpHandler(event) {
 	if(keyPressed == 'D')keyRight = false;
 }
 
+function JoystickLeft(event)
+{
+		joyLeft = true;
+		joyRight = false;
+		console.log("LeftJoy Pressed");
+}
+function JoystickRight(event)
+{
+		joyLeft = false;
+		joyRight = true;
+		console.log("RightJoy Pressed");
+}
+
 document.addEventListener("keydown",keyDownHandler);
 document.addEventListener("keyup",keyUpHandler);
 
+document.addEventListener("joyleft",JoystickLeft);
+document.addEventListener("joyright",JoystickRight);
 
 function gameLoop() {
 	console.log("UP: " + keyUp + " DOWN: " + keyDown + " LEFT: " + keyLeft + " RIGHT: " + keyRight);
@@ -90,11 +108,11 @@ function gameLoop() {
 		ships[i].position.y += offset.y * speed;
 		}
 
-		if(keyLeft)
+		if(keyLeft || joyLeft)
 		{
 			ships[i].angle--
 		}
-		else if(keyRight)
+		else if(keyRight || joyRight)
 		{
 			ships[i].angle++;
 		}
