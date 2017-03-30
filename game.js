@@ -99,6 +99,32 @@ document.addEventListener("keyup",keyUpHandler);
 document.addEventListener("joyleft",JoystickLeft);
 document.addEventListener("joyright",JoystickRight);
 
+function LeftButton()
+{
+	for(var i = 0; i < ships.length; i++)
+	{
+	ships[i].angle--;
+	}
+}
+
+function RightButton()
+{
+	for(var i = 0; i < ships.length; i++)
+	{
+	ships[i].angle++;
+	}
+}
+
+function UpButton()
+{
+	for(var i = 0; i < ships.length; i++)
+	{
+		var offset = degreeToVector2(ships[i].angle)
+		ships[i].position.x += offset.x * speed;
+		ships[i].position.y += offset.y * speed;
+	}
+}
+
 function gameLoop() {
 	console.log("UP: " + keyUp + " DOWN: " + keyDown + " LEFT: " + keyLeft + " RIGHT: " + keyRight);
 	for(var i = 0; i < ships.length; i++){
