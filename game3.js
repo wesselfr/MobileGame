@@ -1,12 +1,12 @@
-var canvas = document.getElementById('canvas');
-var context = canvas.getContext("2d");
+var canvas;
+var context;
 var w = 0;
 var h = 0;
 var timer;
 var updateStarted = false;
 var touches = [];
 
-var player = new Player(0,0);
+var player;
 
 function Vector2(x,y)
 {
@@ -77,8 +77,10 @@ function gameLoop()
 }
 
 function onLoad() {
+	console.log("GameStarted");
 	canvas = document.getElementById('canvas');
 	context = canvas.getContext('2d');
+	player = new Player();
 	timer = setInterval(gameLoop, 15);
 canvas.addEventListener('touchend', function() {
 	context.clearRect(0, 0, w, h);

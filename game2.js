@@ -54,7 +54,7 @@ function gameLoop()
 	updateStarted = false;
 }
 
-function onLoad() {
+function tonLoad() {
 	canvas = document.getElementById('canvas');
 	ctx = canvas.getContext('2d');
 	timer = setInterval(gameLoop, 15);
