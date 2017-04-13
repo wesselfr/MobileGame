@@ -14,7 +14,7 @@
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default unselectable">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -35,16 +35,17 @@
 </nav>
 
 <!-- Alert -->
-<div class="alert alert-warning">
+<div class="alert alert-warning unselectable">
 <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">x</a>
 <strong>Warning!</strong> the game is still in development. Errors may occur.</div>
 
 <!-- Game -->
-<canvas onload="onLoad()" id = "canvas" width="960" height="400"></canvas>
-<script src = "game3.js"></script>
+<canvas onload="onLoad()" id = "canvas" width="960" height="400" class="unselectable"></canvas>
+<script onload="onLoad()" src = "game3.js"></script>
+
 
 <!-- Joystick -->
-<div class="container-fluid bg-3 text-center">
+<div class="container-fluid bg-3 text-center unselectable">
 <p>W - Forward, A/D - Rotate, S - Delete</p>
   <button type="button" oninput = "LeftButton()" class="btn btn-primary btn-lg">Left</button>
   <input type="button" oninput = "UpButton()" class="btn btn-primary btn-lg" value="Move">

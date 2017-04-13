@@ -43,4 +43,10 @@ canvas
       color: #1abc9c !important;
   }
 
+  .unselectable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
 
