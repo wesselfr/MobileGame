@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,3 +55,61 @@
 
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>Mobile Test Game</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-default unselectable">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="index.html">Mobile Game Vormgeving</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="about.html">About</a></li>
+        <li><a href="tech.html">Tech</a></li>
+        <li><a href="#">More</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Alert -->
+<div class="alert alert-warning unselectable">
+<a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">x</a>
+<strong>Warning!</strong> the game is still in development. Errors may occur.</div>
+
+<!-- Game -->
+<canvas onload="onLoad()" id = "canvas" width="960" height="400" class="unselectable"></canvas>
+<script onload="onLoad()" src = "game3.js"></script>
+
+
+<!-- Joystick -->
+<div class="container-fluid bg-3 text-center unselectable">
+<p>W - Forward, A/D - Rotate, S - Delete</p>
+  <button type="button" oninput = "LeftButton()" class="btn btn-primary btn-lg">Left</button>
+  <input type="button" oninput = "UpButton()" class="btn btn-primary btn-lg" value="Move">
+  <input type="button" oninput= "RightButton()" class="btn btn-primary btn-lg" value="Right">
+</div>
+
+</body>
+</html>
+>>>>>>> 40f4d09d25f2352e70ba1ec9f3614d8536cd374c

@@ -6,8 +6,15 @@ var timer;
 var updateStarted = false;
 var touches = [];
 
+var score = 0;
+var highScore = 0;
+
 var player;
+var enemys = [];
 var background;
+
+var px;
+var py;
 
 function Vector2(x,y)
 {
@@ -28,10 +35,10 @@ function degreeToVector2(degree)
 
 
 //Gameplay
-function Player(x,y, angle)
+function Player(x,y)
 {
 	this.position = new Vector2(x,y);
-	this.angle = angle;
+	this.angle = 270;
 }
 
 Player.prototype.draw = function()
@@ -48,6 +55,56 @@ context.closePath();
 context.strokeStyle = '	#00FFFF';
 context.stroke();
 context.restore();
+}
+//Enemy's
+function Enemy(x,y,angle)
+{
+this.position = new Vector2(x,y);
+this.speed = 4;
+this.angle = angle;
+}
+
+Enemy.prototype.draw = function()
+{
+context.save();
+context.translate(this.position.x, this.position.y);
+context.rotate(this.angle * Math.PI / 180);
+context.beginPath();
+context.moveTo(20,0);
+context.lineTo(-20,-20);
+context.lineTo(-20,20);
+context.lineTo(20,0);
+context.closePath();
+context.lineWidth = 2;
+context.fillStyle = '#740035'
+context.fill();
+context.strokeStyle = '#C20058';
+context.stroke();
+context.restore();
+}
+
+Enemy.prototype.update = function()
+{
+	this.offset = degreeToVector2(this.angle)
+	this.position.x += this.offset.x * this.speed;
+	this.position.y += this.offset.y * this.speed;
+
+	if(this.position.y >= canvas.height)
+	{
+		this.position.y = 0;
+		this.position.x = Math.random() * canvas.width;
+
+	}
+
+
+}
+
+//Background
+function BackgroundLines(y)
+{
+	this.position = new Vector2(0, y);
+	this.speed = 1;
+	this.strokeSize = 1;
 }
 
 //Background
@@ -159,7 +216,7 @@ function gameLoop()
 	for (i=0; i<len; i++) {
 		var touch = touches[i];
     	var px = touch.pageX;
-    	var py = touch.pageY;
+    	var py = touch.pageY - 200;
 		player.position = new Vector2(px,py);
     console.log('drawn player at ' + px +',' + py);
 	}
@@ -191,22 +248,63 @@ function gameLoop()
 	context.fillStyle = grd;
 	context.fillRect(0,0,canvas.width, canvas.height);
 
+	context.font = "20px Ariel";
+	context.fillStyle = "white";
+	var fixedScore = parseFloat(score).toFixed( 0 );
+	context.fillText("Score: " + fixedScore + "               HighScore: " + highScore, 30,30);
 	
 
    	background.draw();
    	background.update();
 
-   	
+   	for(var i = 0; i < enemys.length; i++)
+   	{
+   		enemys[i].update();
+   		enemys[i].draw();
+
+   		if(player.position.x >= enemys[i].position.x - 20 && player.position.x <= enemys[i].position.x + 20)
+   		{
+   			if(player.position.y >= enemys[i].position.y - 20 && player.position.y <= enemys[i].position.y + 20)	
+   			{
+   				console.log("Collison");
+
+   				if(fixedScore >= highScore)
+   				{
+   					highScore = fixedScore;
+   				}
+   				score = 0;
+
+   				restart();
+
+   				
+   			}
+   		}
+   	}
+
 	player.draw();
+
+	score+= 1 /120;
 	updateStarted = false;
 }
+function restart()
+{
 
+	player = 0;
+	background = 0;
+	enemys = [];
+
+	player = new Player();
+	background = new Background();
+	enemys.push(new Enemy(40,40, 90));
+
+}
 function onLoad() {
 	console.log("GameStarted");
 	canvas = document.getElementById('canvas');
 	context = canvas.getContext('2d');
 	player = new Player();
 	background = new Background();
+	enemys.push(new Enemy(40,40, 90));
 	timer = setInterval(gameLoop, 15);
 canvas.addEventListener('touchend', function() {
 	context.clearRect(0, 0, w, h);
