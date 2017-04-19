@@ -9,6 +9,8 @@ var touches = [];
 var score = 0;
 var highScore = 0;
 
+var scoreToSpawnEnemys = 10;
+
 var player;
 var enemys = [];
 var background;
@@ -217,6 +219,22 @@ function gameLoop()
 		var touch = touches[i];
     	var px = touch.pageX;
     	var py = touch.pageY - 200;
+    	if(px < 20)
+    	{
+    		px = 20;
+    	}
+    	if(px > canvas.width -20)
+    	{
+    		px = canvas.width -20; 
+    	}
+    	if(py < 265)
+    	{
+    		py = 266;
+    	}
+    	if(py > canvas.height - 60)
+    	{
+    		py = canvas.height - 60;
+    	}
 		player.position = new Vector2(px,py);
     console.log('drawn player at ' + px +',' + py);
 	}
@@ -262,9 +280,9 @@ function gameLoop()
    		enemys[i].update();
    		enemys[i].draw();
 
-   		if(player.position.x >= enemys[i].position.x - 20 && player.position.x <= enemys[i].position.x + 20)
+   		if(player.position.x >= enemys[i].position.x - 40 && player.position.x <= enemys[i].position.x + 40)
    		{
-   			if(player.position.y >= enemys[i].position.y - 20 && player.position.y <= enemys[i].position.y + 20)	
+   			if(player.position.y >= enemys[i].position.y - 40 && player.position.y <= enemys[i].position.y + 40)	
    			{
    				console.log("Collison");
 
@@ -283,7 +301,23 @@ function gameLoop()
 
 	player.draw();
 
+	if(scoreToSpawnEnemys < 0)
+	{
+		enemys.push(new Enemy(Math.random() * canvas.width,0,90));
+		scoreToSpawnEnemys = 10;
+		if(score > 100)
+		{
+			scoreToSpawnEnemys = 5;
+		}
+		if(score > 200)
+		{
+			scoreToSpawnEnemys = 2.5;
+		}
+
+	}
+
 	score+= 1 /120;
+	scoreToSpawnEnemys -= 1/120;
 	updateStarted = false;
 }
 function restart()
@@ -302,9 +336,9 @@ function onLoad() {
 	console.log("GameStarted");
 	canvas = document.getElementById('canvas');
 	context = canvas.getContext('2d');
-	player = new Player();
+	player = new Player(300, 400, 270);
 	background = new Background();
-	enemys.push(new Enemy(40,40, 90));
+	enemys.push(new Enemy(Math.random() * canvas.width,0, 90));
 	timer = setInterval(gameLoop, 15);
 canvas.addEventListener('touchend', function() {
 	context.clearRect(0, 0, w, h);
