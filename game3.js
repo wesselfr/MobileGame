@@ -268,9 +268,9 @@ function gameLoop()
    			{
    				console.log("Collison");
 
-   				if(fixedScore >= highScore)
+   				if(parseFloat(score) > parseFloat(highScore))
    				{
-   					highScore = fixedScore;
+   					highScore = parseFloat(score).toFixed(0);
    				}
    				score = 0;
 
