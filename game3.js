@@ -304,12 +304,12 @@ function gameLoop()
 	if(scoreToSpawnEnemys < 0)
 	{
 		enemys.push(new Enemy(Math.random() * canvas.width,0,90));
-		scoreToSpawnEnemys = 10;
-		if(score > 100)
+		scoreToSpawnEnemys = 7;
+		if(score > 30)
 		{
 			scoreToSpawnEnemys = 5;
 		}
-		if(score > 200)
+		if(score > 50)
 		{
 			scoreToSpawnEnemys = 2.5;
 		}
